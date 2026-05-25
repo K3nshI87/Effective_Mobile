@@ -6,7 +6,13 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN useradd -m -u 1000 appuser
+
 COPY backend/ .
+
+RUN chown -R appuser:appuser /backend
+
+USER appuser
 
 EXPOSE 8080
 
